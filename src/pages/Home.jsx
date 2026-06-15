@@ -107,6 +107,13 @@ function Home({ onNavigate }) {
               <button className="btn-learn">Aprende más →</button>
             </div>
           ))}
+
+          <div className="concept-card concept-card--disabled">
+            <div className="concept-icon">🗂️</div>
+            <h3>Configuración de repositorios</h3>
+            <p>Pendiente de añadir la información por parte de Juan Mesa</p>
+            <button className="btn-learn" disabled>Coming soon</button>
+          </div>
         </div>
       </main>
 

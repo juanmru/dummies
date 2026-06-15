@@ -97,6 +97,30 @@
   box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
 }
 
+.concept-card--disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.concept-card--disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-color: #f0f0f0;
+}
+
+.btn-learn:disabled {
+  background: #cccccc;
+  color: #777777;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-learn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .footer {
   background: #333;
   color: white;
