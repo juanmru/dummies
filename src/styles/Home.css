@@ -11,6 +11,193 @@
   text-align: center;
 }
 
+.countdown {
+  position: relative;
+  background: linear-gradient(160deg, #ffffff 0%, #f4f6ff 100%);
+  border-radius: 22px;
+  padding: 30px 36px 26px;
+  margin: 0 auto 40px;
+  max-width: 600px;
+  color: #2b2b3a;
+  box-shadow:
+    0 20px 45px rgba(40, 30, 90, 0.35),
+    0 2px 0 rgba(255, 255, 255, 0.6) inset;
+  overflow: hidden;
+  animation: countdown-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.countdown::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #667eea, #764ba2, #ff4d6d);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.countdown::after {
+  content: 'PARTIDO DE HOY';
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #ff4d6d;
+}
+
+@keyframes countdown-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.countdown-match {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin: 14px 0 22px;
+}
+
+.countdown-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.countdown-flag {
+  width: 78px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.countdown-team:hover .countdown-flag {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.countdown-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2b2b3a;
+}
+
+.countdown-vs {
+  font-size: 1.3rem;
+  font-weight: 900;
+  font-style: italic;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 64px;
+}
+
+.countdown-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #ffffff;
+  background: linear-gradient(160deg, #5b6fe0 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 18px rgba(102, 126, 234, 0.4),
+    0 1px 0 rgba(255, 255, 255, 0.4) inset;
+}
+
+.countdown-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #8a8aa0;
+}
+
+.countdown-sep {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #cfcfe6;
+  align-self: flex-start;
+  line-height: 56px;
+}
+
+.countdown-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 22px auto 0;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff4d6d, #c9184a);
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(201, 24, 74, 0.35);
+}
+
+.countdown-info::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+  animation: countdown-pulse 1.4s infinite;
+}
+
+@keyframes countdown-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.countdown-live {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 6px 0;
+  color: #d32f2f;
+}
+
 .hero-content h1 {
   font-size: 3.5rem;
   margin-bottom: 20px;
@@ -144,5 +331,31 @@
 
   .concepts-grid {
     grid-template-columns: 1fr;
+  }
+
+  .countdown {
+    padding: 26px 16px 22px;
+  }
+
+  .countdown-match {
+    gap: 16px;
+  }
+
+  .countdown-flag {
+    width: 58px;
+    height: 39px;
+  }
+
+  .countdown-value {
+    font-size: 1.6rem;
+    padding: 10px 0;
+  }
+
+  .countdown-unit {
+    min-width: 50px;
+  }
+
+  .countdown-sep {
+    line-height: 48px;
   }
 }

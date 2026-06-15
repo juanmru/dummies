@@ -1,6 +1,35 @@
+import { useState, useEffect } from 'react'
 import '../styles/Home.css'
 
+function getTimeLeft(target) {
+  const diff = target - new Date()
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, finished: true }
+  }
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+    finished: false
+  }
+}
+
 function Home({ onNavigate }) {
+  const matchDate = new Date(2026, 5, 15, 18, 0, 0)
+  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(matchDate))
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const updated = getTimeLeft(matchDate)
+      setTimeLeft(updated)
+      if (updated.finished) {
+        clearInterval(timer)
+      }
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
   const concepts = [
     {
       id: 1,
@@ -87,6 +116,57 @@ function Home({ onNavigate }) {
     <div className="home">
       <header className="hero">
         <div className="hero-content">
+          {!timeLeft.finished && (
+          <div className="countdown">
+            <div className="countdown-match">
+              <span className="countdown-team">
+                <img
+                  className="countdown-flag"
+                  src="https://flagcdn.com/w160/es.png"
+                  srcSet="https://flagcdn.com/w320/es.png 2x"
+                  alt="Bandera de España"
+                  width="64"
+                  height="43"
+                />
+                <span className="countdown-name">España</span>
+              </span>
+              <span className="countdown-vs">VS</span>
+              <span className="countdown-team">
+                <img
+                  className="countdown-flag"
+                  src="https://flagcdn.com/w160/cv.png"
+                  srcSet="https://flagcdn.com/w320/cv.png 2x"
+                  alt="Bandera de Cabo Verde"
+                  width="64"
+                  height="43"
+                />
+                <span className="countdown-name">Cabo Verde</span>
+              </span>
+            </div>
+            <div className="countdown-timer">
+              <div className="countdown-unit">
+                <span className="countdown-value">{String(timeLeft.days).padStart(2, '0')}</span>
+                <span className="countdown-label">Días</span>
+              </div>
+              <span className="countdown-sep">:</span>
+              <div className="countdown-unit">
+                <span className="countdown-value">{String(timeLeft.hours).padStart(2, '0')}</span>
+                <span className="countdown-label">Horas</span>
+              </div>
+              <span className="countdown-sep">:</span>
+              <div className="countdown-unit">
+                <span className="countdown-value">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                <span className="countdown-label">Min</span>
+              </div>
+              <span className="countdown-sep">:</span>
+              <div className="countdown-unit">
+                <span className="countdown-value">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                <span className="countdown-label">Seg</span>
+              </div>
+            </div>
+            <p className="countdown-info">Hoy · 18:00h</p>
+          </div>
+          )}
           <h1>Formación de Programación para Dummies</h1>
           <p>Aprende programación desde cero de forma práctica y divertida</p>
         </div>
